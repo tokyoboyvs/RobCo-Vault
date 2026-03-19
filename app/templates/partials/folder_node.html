@@ -1,7 +1,7 @@
 <li class="tree-node">
   <div class="tree-folder-row">
     <span class="tree-folder-icon">[+]</span>
-    <span class="tree-folder-name">{{ tree.name }}</span>
+    <a class="tree-folder-link" href="{{ url_for('pages.index', folder_id=tree.id) }}">{{ tree.name }}</a>
   </div>
 
   {% if tree.folders %}

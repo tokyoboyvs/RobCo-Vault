@@ -27,6 +27,7 @@
 
         {% if current_folder %}
         <p class="panel-lead">Dossier courant: {{ current_folder.name }}</p>
+        <p class="panel-meta">ID: {{ current_folder.id }}</p>
 
         {% if current_folder.folders %}
         <h3>Sous-dossiers</h3>

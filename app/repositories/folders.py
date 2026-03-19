@@ -13,6 +13,19 @@ def get_root_folder():
     ).fetchone()
 
 
+def get_folder_by_id(folder_id):
+    db = get_db()
+    return db.execute(
+        '''
+        SELECT id, name, parent_id, is_root, created_at, last_edit
+        FROM folders
+        WHERE id = ?
+        LIMIT 1
+        ''',
+        (folder_id,),
+    ).fetchone()
+
+
 def list_child_folders(parent_id):
     db = get_db()
     return db.execute(
