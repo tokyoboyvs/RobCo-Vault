@@ -1,4 +1,31 @@
 {% extends 'laxout.html' %} {% block content %}
 <h1>RobCo Vault</h1>
-<p>Socle applicatif en place</p>
-{% endblock %}
+<p>Arborescence brute chargee depuis SQLite.</p>
+
+{% if tree %}
+<section>
+  <h2>{{ tree.name }}</h2>
+
+  {% if tree.folders %}
+  <h3>Dossiers enfants</h3>
+  <ul>
+    {% for folder in tree.folders %}
+    <li>{{ folder.name }}</li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>Aucun sous-dossier.</p>
+  {% endif %} {% if tree.notes %}
+  <h3>Notes</h3>
+  <ul>
+    {% for note in tree.notes %}
+    <li>{{ note.name }}</li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>Aucune note.</p>
+  {% endif %}
+</section>
+{% else %}
+<p>Racine introuvable.</p>
+{% endif %} {% endblock %}
