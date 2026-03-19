@@ -1,31 +1,56 @@
 {% extends 'layout.html' %} {% block content %}
-<h1>RobCo Vault</h1>
-<p>Arborescence brute chargee depuis SQLite.</p>
+<div class="app-shell">
+  <header class="app-header">
+    <div>
+      <p class="app-kicker">ROBCO INDUSTRIES (TM) TERMLINK</p>
+      <h1 class="app-title">RobCo Vault</h1>
+    </div>
+    <p class="app-status">SYSTEM ONLINE</p>
+  </header>
 
-{% if tree %}
-<section>
-  <h2>{{ tree.name }}</h2>
+  <div class="app-layout">
+    <aside class="app-sidebar">
+      <div class="panel">
+        <div class="panel-header">
+          <h2>Arborescence</h2>
+        </div>
 
-  {% if tree.folders %}
-  <h3>Dossiers enfants</h3>
-  <ul>
-    {% for folder in tree.folders %}
-    <li>{{ folder.name }}</li>
-    {% endfor %}
-  </ul>
-  {% else %}
-  <p>Aucun sous-dossier.</p>
-  {% endif %} {% if tree.notes %}
-  <h3>Notes</h3>
-  <ul>
-    {% for note in tree.notes %}
-    <li>{{ note.name }}</li>
-    {% endfor %}
-  </ul>
-  {% else %}
-  <p>Aucune note.</p>
-  {% endif %}
-</section>
-{% else %}
-<p>Racine introuvable.</p>
-{% endif %} {% endblock %}
+        {% include 'partials/folder_tree.html' %}
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Panneau principal</h2>
+        </div>
+
+        {% if current_folder %}
+        <p class="panel-lead">Dossier courant: {{ current_folder.name }}</p>
+
+        {% if current_folder.folders %}
+        <h3>Sous-dossiers</h3>
+        <ul>
+          {% for folder in current_folder.folders %}
+          <li>{{ folder.name }}</li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>Aucun sous-dossier.</p>
+        {% endif %} {% if current_folder.notes %}
+        <h3>Notes</h3>
+        <ul>
+          {% for note in current_folder.notes %}
+          <li>{{ note.name }}</li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>Aucune note.</p>
+        {% endif %} {% else %}
+        <p>Racine introuvable.</p>
+        {% endif %}
+      </section>
+    </main>
+  </div>
+</div>
+{% endblock %}

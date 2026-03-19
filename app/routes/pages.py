@@ -7,4 +7,5 @@ pages_bp = Blueprint('pages', __name__)
 @pages_bp.get('/')
 def index():
     tree = build_root_tree()
-    return render_template('index.html', tree=tree)
+    current_folder = tree
+    return render_template('index.html', tree=tree, current_folder=current_folder)

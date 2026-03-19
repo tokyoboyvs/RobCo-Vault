@@ -1,0 +1,21 @@
+<li class="tree-node">
+  <div class="tree-folder-row">
+    <span class="tree-folder-icon">[+]</span>
+    <span class="tree-folder-name">{{ tree.name }}</span>
+  </div>
+
+  {% if tree.folders %}
+  <ul class="tree-list tree-list-nested">
+    {% for child in tree.folders %} {% set tree = child %} {% include 'partials/folder_node.html' %} {% endfor %}
+  </ul>
+  {% endif %} {% if tree.notes %}
+  <ul class="tree-notes">
+    {% for note in tree.notes %}
+    <li class="tree-note-row">
+      <span class="tree-note-icon">-</span>
+      <span class="tree-note-name">{{ note.name }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</li>

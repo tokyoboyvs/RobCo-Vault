@@ -1,0 +1,7 @@
+{% if tree %}
+<ul class="tree-list">
+  {% include 'partials/folder_node.html' with context %}
+</ul>
+{% else %}
+<p class="tree-empty">Arborescence indisponible.</p>
+{% endif %}
