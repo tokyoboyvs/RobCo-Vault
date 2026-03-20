@@ -107,6 +107,7 @@ def delete_folder_action():
 def create_note_action():
     folder_id = request.form.get('folder_id', type=int)
     name = request.form.get('name', '', type=str).strip()
+    password = request.form.get('password', '', type=str).strip()
 
     if not folder_id:
         return redirect(url_for('pages.index'))
@@ -119,7 +120,8 @@ def create_note_action():
     if not name:
         return redirect(url_for('pages.index', folder_id=folder_id))
     
-    create_note(name=name, folder_id=folder_id)
+    create_note(name=name, folder_id=folder_id, password=password or None,)
+
     return redirect(url_for('pages.index', folder_id=folder_id))
 
 

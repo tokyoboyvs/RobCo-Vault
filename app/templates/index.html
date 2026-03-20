@@ -66,6 +66,8 @@
           <input type="hidden" name="folder_id" value="{{ current_folder.id }}" />
           <label class="sr-only" for="note-name">Nom de la note</label>
           <input id="note-name" class="text-input" type="text" name="name" placeholder="Nouvelle note" maxlength="120" required />
+          <label class="sr-only" for="note-password">Mot de passe de la note</label>
+          <input id="note-password" class="text-input" type="password" name="password" placeholder="Mot de passe optionnel" maxlength="120" />
           <button class="action-button" type="submit">Creer note</button>
         </form>
         {% if not current_folder.is_root %}
@@ -95,7 +97,7 @@
         <h3>Notes</h3>
         <ul>
           {% for note in current_folder.notes %}
-          <li>{{ note.name }} (id: {{ note.id }})</li>
+          <li>{{ note.name }} (id: {{ note.id }}) {% if note.password_hash %} [protegee] {% endif %}</li>
           {% endfor %}
         </ul>
         {% else %}

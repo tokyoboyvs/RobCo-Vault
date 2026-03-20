@@ -1,4 +1,5 @@
 from app.db import get_db
+from werkzeug.security import generate_password_hash
 
 
 def list_notes_by_folder(folder_id):
@@ -27,14 +28,15 @@ def get_note_by_id(note_id):
     ).fetchone()
 
 
-def create_note(name, folder_id, content='', password_hash=None):
+def create_note(name, folder_id, content='', password=None):
     db = get_db()
+    password_hash = generate_password_hash(password) if password else None
     cursor = db.execute(
         '''
-        INSERT INTO notes(name, content, password_hash, folder_id)
+        INSERT INTO notes (name, content, password_hash, folder_id)
         VALUES (?, ?, ?, ?)
         ''',
-        (name, content, password_hash, folder_id)
+        (name, content, password_hash, folder_id),
     )
     db.commit()
     return cursor.lastrowid
