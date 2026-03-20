@@ -38,3 +38,17 @@ def create_note(name, folder_id, content='', password_hash=None):
     )
     db.commit()
     return cursor.lastrowid
+
+
+def update_note_content(note_id, content):
+    db = get_db()
+    db.execute(
+        '''
+        UPDATE notes
+        SET content = ?, last_edit = CURRENT_TIMESTAMP
+        WHERE id = ?
+        ''',
+        (content, note_id),
+    )
+    db.commit()
+
