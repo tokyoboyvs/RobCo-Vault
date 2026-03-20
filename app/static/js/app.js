@@ -58,6 +58,37 @@ document.addEventListener("click", (event) => {
   applyFolderState(folderId, !isCollapsed);
 });
 
+function setModalOpen(modalName, isOpen) {
+  const modal = document.querySelector(`[data-modal="${modalName}"]`);
+
+  if (!modal) {
+    return;
+  }
+
+  if (isOpen) {
+    modal.removeAttribute("hidden");
+  } else {
+    modal.setAttribute("hidden", "");
+  }
+}
+
+document.addEventListener("click", (event) => {
+  const openTrigger = event.target.closest("[data-open-modal]");
+
+  if (openTrigger) {
+    setModalOpen(openTrigger.getAttribute("data-open-modal"), true);
+    return;
+  }
+
+  if (event.target.closest("[data-modal-close]")) {
+    const modal = event.target.closest(".modal");
+
+    if (modal) {
+      modal.setAttribute("hidden", "");
+    }
+  }
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   restoreFolderStates();
 });

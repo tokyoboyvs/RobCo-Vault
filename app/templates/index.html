@@ -37,10 +37,7 @@
           <button class="action-button" type="submit">Renommer note</button>
         </form>
 
-        <form class="inline-form" method="post" action="{{ url_for('pages.delete_note_action') }}">
-          <input type="hidden" name="note_id" value="{{ current_note.id }}" />
-          <button class="action-button action-button-danger" type="submit">Supprimer note</button>
-        </form>
+        <button class="action-button action-button-danger" type="button" data-open-modal="delete-note">Supprimer note</button>
 
         <form method="post" action="{{ url_for('pages.save_note_action') }}">
           <input type="hidden" name="note_id" value="{{ current_note.id }}" />
@@ -67,21 +64,10 @@
         <p class="panel-lead">Dossier courant: {{ current_folder.name }}</p>
         <p class="panel-meta">ID: {{ current_folder.id }}</p>
 
-        <form class="inline-form" method="post" action="{{ url_for('pages.create_folder_action') }}">
-          <input type="hidden" name="parent_id" value="{{ current_folder.id }}" />
-          <label class="sr-only" for="folder-name">Nom du dossier</label>
-          <input id="folder-name" class="text-input" type="text" name="name" placeholder="Nouveau dossier" maxlength="120" required />
-          <button class="action-button" type="submit">Creer dossier</button>
-        </form>
+        <button class="action-button" type="button" data-open-modal="create-folder">Creer dossier</button>
 
-        <form class="inline-form" method="post" action="{{ url_for('pages.create_note_action') }}">
-          <input type="hidden" name="folder_id" value="{{ current_folder.id }}" />
-          <label class="sr-only" for="note-name">Nom de la note</label>
-          <input id="note-name" class="text-input" type="text" name="name" placeholder="Nouvelle note" maxlength="120" required />
-          <label class="sr-only" for="note-password">Mot de passe de la note</label>
-          <input id="note-password" class="text-input" type="password" name="password" placeholder="Mot de passe optionnel" maxlength="120" />
-          <button class="action-button" type="submit">Creer note</button>
-        </form>
+        <button class="action-button" type="button" data-open-modal="create-note">Creer note</button>
+
         {% if not current_folder.is_root %}
         <form class="inline-form" method="post" action="{{ url_for('pages.rename_folder_action') }}">
           <input type="hidden" name="folder_id" value="{{ current_folder.id }}" />
@@ -90,13 +76,14 @@
           <button class="action-button" type="submit">Renommer dossier</button>
         </form>
 
-        <form class="inline-form" method="post" action="{{ url_for('pages.delete_folder_action') }}">
-          <input type="hidden" name="folder_id" value="{{ current_folder.id }}" />
-          <button class="action-button action-button-danger" type="submit">Supprimer dossier</button>
-        </form>
+        <button class="action-button action-button-danger" type="button" data-open-modal="delete-folder">Supprimer dossier</button>
+
         {% else %}
+
         <p class="panel-meta">Le dossier racine ne peut pas etre renomme ni supprime.</p>
+
         {% endif %} {% if current_folder.folders %}
+
         <h3>Sous-dossiers</h3>
         <ul>
           {% for folder in current_folder.folders %}
@@ -121,4 +108,7 @@
     </main>
   </div>
 </div>
-{% endblock %}
+{% if current_folder %} {% with modal_name='create-folder', modal_title='Creer un dossier', form_action=url_for('pages.create_folder_action'), hidden_fields={'parent_id': current_folder.id}, input_id='modal-create-folder-name', input_label='Nom du dossier', input_type='text', input_name='name', input_value='', input_placeholder='Nouveau dossier', input_required=True, submit_label='Creer dossier' %} {% include 'partials/modal_input.html' %} {% endwith %} {% with modal_name='create-note',
+modal_title='Creer une note', form_action=url_for('pages.create_note_action'), hidden_fields={'folder_id': current_folder.id}, input_id='modal-create-note-name', input_label='Nom de la note', input_type='text', input_name='name', input_value='', input_placeholder='Nouvelle note', input_required=True, submit_label='Creer note' %} {% include 'partials/modal_input.html' %} {% endwith %} {% endif %} {% if not current_note and current_folder and not current_folder.is_root %} {% with
+modal_name='delete-folder', modal_title='Supprimer le dossier', modal_message='Confirmer la suppression de ce dossier et de son contenu.', form_action=url_for('pages.delete_folder_action'), hidden_fields={'folder_id': current_folder.id}, submit_label='Supprimer dossier' %} {% include 'partials/modal_confirm.html' %} {% endwith %} {% endif %} {% if current_note %} {% with modal_name='delete-note', modal_title='Supprimer la note', modal_message='Confirmer la suppression definitive de cette note.',
+form_action=url_for('pages.delete_note_action'), hidden_fields={'note_id': current_note.id}, submit_label='Supprimer note' %} {% include 'partials/modal_confirm.html' %} {% endwith %} {% endif %} {% endblock %}

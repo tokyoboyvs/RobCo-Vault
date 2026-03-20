@@ -1,0 +1,23 @@
+<div class="modal" data-modal="{{ modal_name }}" hidden>
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-dialog">
+    <div class="panel">
+      <div class="panel-header">
+        <h2>{{ modal_title }}</h2>
+      </div>
+
+      <p>{{ modal_message }}</p>
+
+      <form method="post" action="{{ form_action }}">
+        {% for hidden_name, hidden_value in hidden_fields.items() %}
+        <input type="hidden" name="{{ hidden_name }}" value="{{ hidden_value }}" />
+        {% endfor %}
+
+        <div class="modal-actions">
+          <button class="action-button action-button-danger" type="submit">{{ submit_label }}</button>
+          <button class="action-button" type="button" data-modal-close>Annuler</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
