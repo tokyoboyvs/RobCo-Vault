@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}" />
   </head>
   <body>
+    <div class="boot-overlay" data-boot-overlay hidden>
+      <div class="boot-screen">
+        <p class="boot-line">ROBCO INDUSTRIES (TM) TERMLINK</p>
+        <p class="boot-line">INITIALIZING VAULT SYSTEM...</p>
+        <p class="boot-line">LOADING DIRECTORY TREE...</p>
+        <p class="boot-line">READY</p>
+        <button class="action-button boot-button" type="button" data-boot-dismiss>ENTER VAULT</button>
+      </div>
+    </div>
     {% block content %}{% endblock %}
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
   </body>

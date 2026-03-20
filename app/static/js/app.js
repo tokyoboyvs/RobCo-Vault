@@ -1,4 +1,5 @@
 const STORAGE_KEY = "robco-vault:collapsed-folders";
+const BOOT_KEY = "robco-vault:boot-shown";
 
 function readCollapsedFolders() {
   try {
@@ -89,6 +90,38 @@ document.addEventListener("click", (event) => {
   }
 });
 
+function showBootOverlayIfNeeded() {
+  const overlay = document.querySelector("[data-boot-overlay]");
+
+  if (!overlay) {
+    return;
+  }
+
+  const alreadyShown = window.sessionStorage.getItem(BOOT_KEY) === "1";
+
+  if (!alreadyShown) {
+    overlay.removeAttribute("hidden");
+  }
+}
+
+function dismissBootOverlay() {
+  const overlay = document.querySelector("[data-boot-overlay]");
+
+  if (!overlay) {
+    return;
+  }
+
+  overlay.setAttribute("hidden", "");
+  window.sessionStorage.setItem(BOOT_KEY, "1");
+}
+
+document.addEventListener("click", (event) => {
+  if (event.target.closest("[data-boot-dismiss]")) {
+    dismissBootOverlay();
+  }
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   restoreFolderStates();
+  showBootOverlayIfNeeded();
 });
