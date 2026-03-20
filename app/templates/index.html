@@ -22,10 +22,18 @@
     <main class="app-main">
       <section class="panel">
         <div class="panel-header">
-          <h2>Panneau principal</h2>
+          <h2>{% if current_note %}Note{% else %}Panneau principal{% endif %}</h2>
         </div>
 
-        {% if current_folder %}
+        {% if current_note %}
+        <p class="panel-lead">Note courante: {{ current_note.name }}</p>
+        <p class="panel-meta">ID: {{ current_note.id }}</p>
+        <p class="panel-meta">Dossier parent: {{ current_folder.name }}</p>
+
+        <h3>Contenu</h3>
+        <textarea class="note-textarea" rows="18" readonly>{{ current_note.content }}</textarea>
+
+        {% elif current_folder %}
         <p class="panel-lead">Dossier courant: {{ current_folder.name }}</p>
         <p class="panel-meta">ID: {{ current_folder.id }}</p>
 

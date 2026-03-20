@@ -1,4 +1,4 @@
-from app.repositories.notes import create_note
+from app.repositories.notes import create_note, get_note_by_id
 from app.services.tree_builder import build_root_tree, build_folder_node
 from flask import Blueprint, redirect, render_template, request, url_for
 from app.repositories.folders import create_folder, delete_folder, get_folder_by_id, rename_folder
@@ -10,19 +10,34 @@ pages_bp = Blueprint('pages', __name__)
 def index():
     tree = build_root_tree()
     folder_id = request.args.get('folder_id', type=int)
+    note_id = request.args.get('note_id', type=int)
 
     if tree is None:
         current_folder = None
-    elif folder_id is None:
-        current_folder = tree
+        current_note = None
     else:
-        folder_row = get_folder_by_id(folder_id)
-        current_folder = build_folder_node(folder_row) if folder_row else tree
+        current_note = None
+
+        if note_id is not None:
+            note_row = get_note_by_id(note_id)
+
+            if note_row is not None:
+                current_note = dict(note_row)
+                folder_row = get_folder_by_id(note_row['folder_id'])
+                current_folder = build_folder_node(folder_row) if folder_row else tree
+            else:
+                current_folder = tree
+        elif folder_id is None:
+            current_folder = tree
+        else:
+            folder_row = get_folder_by_id(folder_id)
+            current_folder = build_folder_node(folder_row) if folder_row else tree
     
     return render_template(
         'index.html',
         tree=tree,
         current_folder=current_folder,
+        current_note=current_note,
     )
 
 

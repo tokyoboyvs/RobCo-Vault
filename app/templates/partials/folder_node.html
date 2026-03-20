@@ -13,7 +13,7 @@
     {% for note in tree.notes %}
     <li class="tree-note-row">
       <span class="tree-note-icon">-</span>
-      <span class="tree-note-name">{{ note.name }}</span>
+      <a class="tree-note-link" href="{{ url_for('pages.index', note_id=note.id) }}">{{ note.name }}</a>
     </li>
     {% endfor %}
   </ul>
