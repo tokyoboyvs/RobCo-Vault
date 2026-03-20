@@ -6,6 +6,9 @@
   --text-dim: #4e8f4d;
   --border: #1d3b1d;
   --accent: #a7ff9e;
+  --danger: #ff7a7a;
+  --danger-dim: #a64d4d;
+  --glow: rgba(124, 255, 122, 0.18);
 }
 
 * {
@@ -109,12 +112,17 @@ ul {
   padding: 16px;
   border: 1px solid var(--border);
   background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  box-shadow:
+    inset 0 0 0 1px rgba(124, 255, 122, 0.03),
+    0 0 24px rgba(0, 0, 0, 0.18);
 }
 
 .panel-header {
   padding-bottom: 12px;
   margin-bottom: 16px;
   border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .panel-lead {
@@ -200,7 +208,9 @@ ul {
   background: rgba(5, 7, 5, 0.95);
   color: var(--text);
   font: inherit;
+  line-height: 1.5;
   resize: vertical;
+  box-shadow: inset 0 0 24px rgba(124, 255, 122, 0.03);
 }
 
 .panel-meta {
@@ -235,6 +245,9 @@ ul {
 .action-button {
   padding: 10px 14px;
   cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  box-shadow: inset 0 0 0 1px rgba(124, 255, 122, 0.04);
 }
 
 .action-button:hover,
@@ -243,6 +256,19 @@ ul {
   outline: none;
   border-color: var(--accent);
   color: var(--accent);
+  box-shadow: 0 0 0 3px var(--glow);
+}
+
+.action-button-danger {
+  color: var(--danger);
+  border-color: var(--danger-dim);
+}
+
+.action-button-danger:hover,
+.action-button-danger:focus {
+  color: var(--danger);
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px rgba(255, 122, 122, 0.14);
 }
 
 .sr-only {
@@ -293,6 +319,33 @@ ul {
   display: flex;
   gap: 10px;
   margin-top: 16px;
+}
+
+ul {
+  padding-left: 18px;
+}
+
+li {
+  margin-bottom: 6px;
+}
+
+.app-main .panel h3 {
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.app-main .panel ul {
+  margin-bottom: 18px;
+}
+
+.panel-meta + .panel-meta {
+  margin-top: -6px;
+}
+
+.boot-screen,
+.panel,
+.modal-dialog .panel {
+  backdrop-filter: blur(2px);
 }
 
 @media (max-width: 900px) {
