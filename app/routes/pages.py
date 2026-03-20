@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect, render_template, request, url_for
-from app.repositories.folders import create_folder, get_folder_by_id
+from app.repositories.folders import create_folder, get_folder_by_id, rename_folder
 from app.services.tree_builder import build_root_tree, build_folder_node
 
 pages_bp = Blueprint('pages', __name__)
@@ -38,3 +38,26 @@ def create_folder_action():
     
     create_folder(name=name, parent_id=parent_id)
     return redirect(url_for('pages.index', folder_id=parent_id))
+
+
+@pages_bp.post('/folders/rename')
+def rename_folder_action():
+    folder_id = request.form.get('folder_id', type=int)
+    name = request.form.get('name', '', type=str).strip()
+
+    if not folder_id:
+        return redirect(url_for('pages.index'))
+    
+    folder_row = get_folder_by_id(folder_id)
+
+    if folder_row is None:
+        return redirect(url_for('pages.index'))
+    
+    if folder_row['is_root']:
+        return redirect(url_for('pages.index', folder_id=folder_id))
+    
+    if not name:
+        return redirect(url_for('pages.index', folder_id=folder_id))
+    
+    rename_folder(folder_id=folder_id, name=name)
+    return redirect(url_for('pages.index', folder_id=folder_id))

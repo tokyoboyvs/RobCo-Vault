@@ -35,8 +35,16 @@
           <input id="folder-name" class="text-input" type="text" name="name" placeholder="Nouveau dossier" maxlength="120" required />
           <button class="action-button" type="submit">Creer dossier</button>
         </form>
-
-        {% if current_folder.folders %}
+        {% if not current_folder.is_root %}
+        <form class="inline-form" method="post" action="{{ url_for('pages.rename_folder_action') }}">
+          <input type="hidden" name="folder_id" value="{{ current_folder.id }}" />
+          <label class="sr-only" for="rename-folder-name">Renommer le dossier</label>
+          <input id="rename-folder-name" class="text-input" type="text" name="name" value="{{ current_folder.name }}" maxlength="120" required />
+          <button class="action-button" type="submit">Renommer dossier</button>
+        </form>
+        {% else %}
+        <p class="panel-meta">Le dossier racine ne peut pas etre renomme</p>
+        {% endif %} {% if current_folder.folders %}
         <h3>Sous-dossiers</h3>
         <ul>
           {% for folder in current_folder.folders %}

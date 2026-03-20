@@ -50,3 +50,16 @@ def create_folder(name, parent_id, is_root=0):
     )
     db.commit()
     return cursor.lastrowid
+
+
+def rename_folder(folder_id, name):
+    db = get_db()
+    db.execute(
+        '''
+        UPDATE folders
+        SET name = ?, last_edit = CURRENT_TIMESTAMP
+        WHERE id = ? AND is_root = 0
+        ''',
+        (name, folder_id),
+    )
+    db.commit()
