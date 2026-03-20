@@ -63,3 +63,15 @@ def rename_folder(folder_id, name):
         (name, folder_id),
     )
     db.commit()
+
+
+def delete_folder(folder_id):
+    db = get_db()
+    db.execute(
+        '''
+        DELETE FROM folders
+        WHERE id = ? AND is_root = 0
+        ''',
+        (folder_id,),
+    )
+    db.commit()

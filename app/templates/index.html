@@ -42,13 +42,18 @@
           <input id="rename-folder-name" class="text-input" type="text" name="name" value="{{ current_folder.name }}" maxlength="120" required />
           <button class="action-button" type="submit">Renommer dossier</button>
         </form>
+
+        <form class="inline-form" method="post" action="{{ url_for('pages.delete_folder_action') }}">
+          <input type="hidden" name="folder_id" value="{{ current_folder.id }}" />
+          <button class="action-button action-button-danger" type="submit">Supprimer dossier</button>
+        </form>
         {% else %}
-        <p class="panel-meta">Le dossier racine ne peut pas etre renomme</p>
+        <p class="panel-meta">Le dossier racine ne peut pas etre renomme ni supprime.</p>
         {% endif %} {% if current_folder.folders %}
         <h3>Sous-dossiers</h3>
         <ul>
           {% for folder in current_folder.folders %}
-          <li>{{ folder.name }}</li>
+          <li>{{ folder.name }} (id: {{ folder.id }})</li>
           {% endfor %}
         </ul>
         {% else %}
