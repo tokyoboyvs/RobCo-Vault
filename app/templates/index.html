@@ -37,6 +37,11 @@
           <button class="action-button" type="submit">Renommer note</button>
         </form>
 
+        <form class="inline-form" method="post" action="{{ url_for('pages.delete_note_action') }}">
+          <input type="hidden" name="note_id" value="{{ current_note.id }}" />
+          <button class="action-button action-button-danger" type="submit">Supprimer note</button>
+        </form>
+
         <form method="post" action="{{ url_for('pages.save_note_action') }}">
           <input type="hidden" name="note_id" value="{{ current_note.id }}" />
 

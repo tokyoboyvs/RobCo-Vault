@@ -64,3 +64,15 @@ def rename_note(note_id, name):
         (name, note_id),
     )
     db.commit()
+
+
+def delete_note(note_id):
+    db = get_db()
+    db.execute(
+        '''
+        DELETE FROM notes
+        WHERE id = ?
+        ''',
+        (note_id,),
+    )
+    db.commit()
