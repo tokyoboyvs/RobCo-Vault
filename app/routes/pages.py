@@ -15,18 +15,27 @@ def index():
     if tree is None:
         current_folder = None
         current_note = None
+        locked_note = None
     else:
         current_note = None
+        locked_note = None
 
         if note_id is not None:
             note_row = get_note_by_id(note_id)
 
             if note_row is not None:
-                current_note = dict(note_row)
                 folder_row = get_folder_by_id(note_row['folder_id'])
                 current_folder = build_folder_node(folder_row) if folder_row else tree
+
+                if note_row['password_hash']:
+                    current_note = None
+                    locked_note = dict(note_row)
+                else:
+                    current_note = dict(note_row)
+                    locked_note = None
             else:
                 current_folder = tree
+                locked_note = None
         elif folder_id is None:
             current_folder = tree
         else:
@@ -38,6 +47,7 @@ def index():
         tree=tree,
         current_folder=current_folder,
         current_note=current_note,
+        locked_note=locked_note,
     )
 
 

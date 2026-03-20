@@ -22,7 +22,7 @@
     <main class="app-main">
       <section class="panel">
         <div class="panel-header">
-          <h2>{% if current_note %}Note{% else %}Panneau principal{% endif %}</h2>
+          <h2>{% if current_note %}Note{% elif locked_note %}Note protegee{% else %}Panneau principal{% endif %}</h2>
         </div>
 
         {% if current_note %}
@@ -50,7 +50,12 @@
 
           <button class="action-button" type="submit">Sauvegarder note</button>
         </form>
-
+        {% elif locked_note %}
+        <p class="panel-lead">Note protegee: {{ locked_note.name }}</p>
+        <p class="panel-meta">ID: {{ locked_note.id }}</p>
+        <p class="panel-meta">Dossier parent: {{ current_folder.name }}</p>
+        <p class="panel-meta">Cette note est protegee par mot de passe.</p>
+        <p>Saisie du mot de passe a venir a l'etape suivante.</p>
         {% elif current_folder %}
         <p class="panel-lead">Dossier courant: {{ current_folder.name }}</p>
         <p class="panel-meta">ID: {{ current_folder.id }}</p>
