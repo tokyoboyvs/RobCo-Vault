@@ -29,6 +29,13 @@
         <p class="panel-lead">Dossier courant: {{ current_folder.name }}</p>
         <p class="panel-meta">ID: {{ current_folder.id }}</p>
 
+        <form class="inline-form" method="post" action="{{ url_for('pages.create_folder_action') }}">
+          <input type="hidden" name="parent_id" value="{{ current_folder.id }}" />
+          <label class="sr-only" for="folder-name">Nom du dossier</label>
+          <input id="folder-name" class="text-input" type="text" name="name" placeholder="Nouveau dossier" maxlength="120" required />
+          <button class="action-button" type="submit">Creer dossier</button>
+        </form>
+
         {% if current_folder.folders %}
         <h3>Sous-dossiers</h3>
         <ul>

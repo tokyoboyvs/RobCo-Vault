@@ -37,3 +37,16 @@ def list_child_folders(parent_id):
         ''',
         (parent_id,),
     ).fetchall()
+
+
+def create_folder(name, parent_id, is_root=0):
+    db = get_db()
+    cursor = db.execute(
+        '''
+        INSERT INTO folders (name, parent_id, is_root)
+        VALUES (?, ?, ?)
+        ''',
+        (name, parent_id, is_root),
+    )
+    db.commit()
+    return cursor.lastrowid
