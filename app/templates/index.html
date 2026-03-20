@@ -55,8 +55,15 @@
         <p class="panel-meta">ID: {{ locked_note.id }}</p>
         <p class="panel-meta">Dossier parent: {{ current_folder.name }}</p>
         <p class="panel-meta">Cette note est protegee par mot de passe.</p>
-        <p>Saisie du mot de passe a venir a l'etape suivante.</p>
-        {% elif current_folder %}
+        <form class="inline-form" method="post" action="{{ url_for('pages.unlock_note_action') }}">
+          <input type="hidden" name="note_id" value="{{ locked_note.id }}" />
+          <label class="sr-only" for="unlock-password">Mot de passe</label>
+          <input id="unlock-password" class="text-input" type="password" name="password" placeholder="Mot de passe" required />
+          <button class="action-button" type="submit">Ouvrir note</button>
+        </form>
+        {% if unlock_error %}
+        <p class="panel-meta">Mot de passe incorrect.</p>
+        {% endif %} {% elif current_folder %}
         <p class="panel-lead">Dossier courant: {{ current_folder.name }}</p>
         <p class="panel-meta">ID: {{ current_folder.id }}</p>
 

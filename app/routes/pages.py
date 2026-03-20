@@ -1,5 +1,6 @@
+from werkzeug.security import check_password_hash
 from app.services.tree_builder import build_root_tree, build_folder_node
-from flask import Blueprint, redirect, render_template, request, url_for
+from flask import Blueprint, redirect, render_template, request, session, url_for
 from app.repositories.folders import create_folder, delete_folder, get_folder_by_id, rename_folder
 from app.repositories.notes import create_note, delete_note, get_note_by_id, rename_note, update_note_content
 
@@ -11,6 +12,7 @@ def index():
     tree = build_root_tree()
     folder_id = request.args.get('folder_id', type=int)
     note_id = request.args.get('note_id', type=int)
+    unlock_error = request.args.get('unlock_error', type=int) == 1
 
     if tree is None:
         current_folder = None
@@ -27,7 +29,9 @@ def index():
                 folder_row = get_folder_by_id(note_row['folder_id'])
                 current_folder = build_folder_node(folder_row) if folder_row else tree
 
-                if note_row['password_hash']:
+                unlocked_notes = session.get('unlocked_notes', [])
+
+                if note_row['password_hash'] and note_row['id'] not in unlocked_notes:
                     current_note = None
                     locked_note = dict(note_row)
                 else:
@@ -48,6 +52,7 @@ def index():
         current_folder=current_folder,
         current_note=current_note,
         locked_note=locked_note,
+        unlock_error=unlock_error,
     )
 
 
@@ -64,6 +69,34 @@ def create_folder_action():
     
     create_folder(name=name, parent_id=parent_id)
     return redirect(url_for('pages.index', folder_id=parent_id))
+
+
+@pages_bp.post('/notes/unlock')
+def unlock_note_action():
+    note_id = request.form.get('note_id', type=int)
+    password = request.form.get('password', '', type=str)
+
+    if not note_id:
+        return redirect(url_for('pages.index'))
+
+    note_row = get_note_by_id(note_id)
+
+    if note_row is None:
+        return redirect(url_for('pages.index'))
+
+    if not note_row['password_hash']:
+        return redirect(url_for('pages.index', note_id=note_id))
+
+    if check_password_hash(note_row['password_hash'], password):
+        unlocked_notes = session.get('unlocked_notes', [])
+
+        if note_id not in unlocked_notes:
+            unlocked_notes.append(note_id)
+            session['unlocked_notes'] = unlocked_notes
+
+        return redirect(url_for('pages.index', note_id=note_id))
+
+    return redirect(url_for('pages.index', note_id=note_id, unlock_error=1))
 
 
 @pages_bp.post('/folders/rename')
