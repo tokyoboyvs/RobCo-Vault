@@ -113,7 +113,6 @@ ul {
   gap: 8px;
 }
 
-.tree-folder-icon,
 .tree-note-icon {
   color: var(--text-dim);
 }
@@ -138,6 +137,27 @@ ul {
 .tree-note-link:focus {
   color: var(--accent);
   text-decoration: underline;
+}
+
+.tree-toggle {
+  min-width: 28px;
+  border: 1px solid var(--border);
+  background: rgba(5, 7, 5, 0.95);
+  color: var(--text-dim);
+  font: inherit;
+  cursor: pointer;
+}
+
+.tree-toggle:hover,
+.tree-toggle:focus {
+  outline: none;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.tree-list-nested.is-collapsed,
+.tree-notes.is-collapsed {
+  display: none;
 }
 
 .note-textarea {

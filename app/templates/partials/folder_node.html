@@ -1,15 +1,15 @@
 <li class="tree-node">
   <div class="tree-folder-row">
-    <span class="tree-folder-icon">[+]</span>
+    <button class="tree-toggle" type="button" data-folder-toggle data-folder-id="{{ tree.id }}" aria-expanded="true">[-]</button>
     <a class="tree-folder-link" href="{{ url_for('pages.index', folder_id=tree.id) }}">{{ tree.name }}</a>
   </div>
 
   {% if tree.folders %}
-  <ul class="tree-list tree-list-nested">
+  <ul class="tree-list tree-list-nested" data-folder-children="{{ tree.id }}">
     {% for child in tree.folders %} {% set tree = child %} {% include 'partials/folder_node.html' %} {% endfor %}
   </ul>
   {% endif %} {% if tree.notes %}
-  <ul class="tree-notes">
+  <ul class="tree-notes" data-folder-notes="{{ tree.id }}">
     {% for note in tree.notes %}
     <li class="tree-note-row">
       <span class="tree-note-icon">-</span>
