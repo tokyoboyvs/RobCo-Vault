@@ -30,6 +30,13 @@
         <p class="panel-meta">ID: {{ current_note.id }}</p>
         <p class="panel-meta">Dossier parent: {{ current_folder.name }}</p>
 
+        <form class="inline-form" method="post" action="{{ url_for('pages.rename_note_action') }}">
+          <input type="hidden" name="note_id" value="{{ current_note.id }}" />
+          <label class="sr-only" for="rename-note-name">Renommer la note</label>
+          <input id="rename-note-name" class="text-input" type="text" name="name" value="{{ current_note.name }}" maxlength="120" required />
+          <button class="action-button" type="submit">Renommer note</button>
+        </form>
+
         <form method="post" action="{{ url_for('pages.save_note_action') }}">
           <input type="hidden" name="note_id" value="{{ current_note.id }}" />
 

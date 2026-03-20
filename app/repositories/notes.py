@@ -52,3 +52,15 @@ def update_note_content(note_id, content):
     )
     db.commit()
 
+
+def rename_note(note_id, name):
+    db = get_db()
+    db.execute(
+        '''
+        UPDATE notes
+        SET name = ?, last_edit = CURRENT_TIMESTAMP
+        WHERE id = ?
+        ''',
+        (name, note_id),
+    )
+    db.commit()

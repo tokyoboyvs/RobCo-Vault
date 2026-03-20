@@ -1,4 +1,4 @@
-from app.repositories.notes import create_note, get_note_by_id, update_note_content
+from app.repositories.notes import create_note, get_note_by_id, rename_note, update_note_content
 from app.services.tree_builder import build_root_tree, build_folder_node
 from flask import Blueprint, redirect, render_template, request, url_for
 from app.repositories.folders import create_folder, delete_folder, get_folder_by_id, rename_folder
@@ -137,4 +137,24 @@ def save_note_action():
         return redirect(url_for('pages.index'))
 
     update_note_content(note_id=note_id, content=content)
+    return redirect(url_for('pages.index', note_id=note_id))
+
+
+@pages_bp.post('/notes/rename')
+def rename_note_action():
+    note_id = request.form.get('note_id', type=int)
+    name = request.form.get('name', '', type=str).strip()
+
+    if not note_id:
+        return redirect(url_for('pages.index'))
+
+    note_row = get_note_by_id(note_id)
+
+    if note_row is None:
+        return redirect(url_for('pages.index'))
+
+    if not name:
+        return redirect(url_for('pages.index', note_id=note_id))
+
+    rename_note(note_id=note_id, name=name)
     return redirect(url_for('pages.index', note_id=note_id))
