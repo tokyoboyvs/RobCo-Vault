@@ -146,6 +146,8 @@ body[data-theme="classic"] .app-main {
 body[data-theme="classic"] .app-main .panel-header {
   position: sticky;
   top: 0;
+  margin-bottom: 10px;
+  padding-top: 2px;
   background: #000000;
   z-index: 2;
 }
@@ -173,6 +175,46 @@ body[data-theme="classic"] .note-textarea {
   box-shadow: none;
 }
 
+body[data-theme="classic"] .inline-form {
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+body[data-theme="classic"] .action-button,
+body[data-theme="classic"] .text-input {
+  padding: 5px 10px;
+  font-size: 16px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+body[data-theme="classic"] .text-input {
+  min-width: 180px;
+}
+
+body[data-theme="classic"] .note-textarea {
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+body[data-theme="classic"] .app-main .panel h3 {
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+body[data-theme="classic"] .app-main .panel ul {
+  margin-bottom: 10px;
+}
+
+body[data-theme="classic"] .panel-lead {
+  color: var(--text);
+}
+
+body[data-theme="classic"] .panel-meta {
+  color: var(--text-dim);
+}
+
 body[data-theme="classic"] .action-button:hover,
 body[data-theme="classic"] .action-button:focus,
 body[data-theme="classic"] .text-input:focus,
@@ -181,6 +223,14 @@ body[data-theme="classic"] .tree-toggle:focus {
   background: var(--text);
   color: #000000;
   box-shadow: none;
+}
+
+body[data-theme="classic"] .note-textarea:focus {
+  outline: none;
+  background: #111111;
+  color: var(--text);
+  box-shadow: none;
+  border-color: var(--accent);
 }
 
 body[data-theme="classic"] .action-button-danger {
