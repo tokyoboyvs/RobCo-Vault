@@ -5,7 +5,11 @@
       <p class="app-kicker">ROBCO INDUSTRIES (TM) TERMLINK</p>
       <h1 class="app-title">RobCo Vault</h1>
     </div>
-    <p class="app-status">SYSTEM ONLINE</p>
+
+    <div class="app-header-actions">
+      <p class="app-status">SYSTEM ONLINE</p>
+      <button class="action-button settings-button" type="button" data-open-modal="theme-settings" aria-label="Ouvrir les reglages d'apparence">⚙</button>
+    </div>
   </header>
 
   <div class="app-layout">
@@ -138,4 +142,27 @@ modal_title='Creer une note', form_action=url_for('pages.create_note_action'), h
 </div>
 
 {% endwith %} {% endif %} {% if not current_note and current_folder and not current_folder.is_root %} {% with modal_name='delete-folder', modal_title='Supprimer le dossier', modal_message='Confirmer la suppression de ce dossier et de son contenu.', form_action=url_for('pages.delete_folder_action'), hidden_fields={'folder_id': current_folder.id}, submit_label='Supprimer dossier' %} {% include 'partials/modal_confirm.html' %} {% endwith %} {% endif %} {% if current_note %} {% with
-modal_name='delete-note', modal_title='Supprimer la note', modal_message='Confirmer la suppression definitive de cette note.', form_action=url_for('pages.delete_note_action'), hidden_fields={'note_id': current_note.id}, submit_label='Supprimer note' %} {% include 'partials/modal_confirm.html' %} {% endwith %} {% endif %} {% endblock %}
+modal_name='delete-note', modal_title='Supprimer la note', modal_message='Confirmer la suppression definitive de cette note.', form_action=url_for('pages.delete_note_action'), hidden_fields={'note_id': current_note.id}, submit_label='Supprimer note' %} {% include 'partials/modal_confirm.html' %} {% endwith %} {% endif %}
+<div class="modal" data-modal="theme-settings" hidden>
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-dialog">
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Reglages</h2>
+      </div>
+
+      <p class="panel-meta">Choisir l'ambiance visuelle du Vault.</p>
+
+      <div class="theme-option-list">
+        <button class="action-button theme-option-button" type="button" data-theme-select="classic">RobCo Classic</button>
+
+        <button class="action-button theme-option-button" type="button" data-theme-select="modern">RobCo Modern</button>
+      </div>
+
+      <div class="modal-actions">
+        <button class="action-button" type="button" data-modal-close>Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

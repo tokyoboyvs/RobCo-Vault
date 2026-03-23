@@ -11,6 +11,30 @@
   --glow: rgba(124, 255, 122, 0.18);
 }
 
+body[data-theme="classic"] {
+  --bg: #000000;
+  --panel: #050505;
+  --panel-2: #090909;
+  --text: #33ff33;
+  --text-dim: #24b324;
+  --border: #33ff33;
+  --accent: #7dff7d;
+  --header-bg: #000000;
+  --panel-shadow: none;
+}
+
+body[data-theme="modern"] {
+  --bg: #050705;
+  --panel: #0b0f0b;
+  --panel-2: #101610;
+  --text: #7cff7a;
+  --text-dim: #4e8f4d;
+  --border: #1d3b1d;
+  --accent: #a7ff9e;
+  --header-bg: linear-gradient(180deg, rgba(24, 36, 24, 0.95), rgba(10, 15, 10, 0.98));
+  --panel-shadow: inset 0 0 0 1px rgba(124, 255, 122, 0.03), 0 0 24px rgba(0, 0, 0, 0.18);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -84,7 +108,7 @@ ul {
   gap: 16px;
   padding: 16px 20px;
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(24, 36, 24, 0.95), rgba(10, 15, 10, 0.98));
+  background: var(--header-bg);
   margin-bottom: 16px;
 }
 
@@ -101,6 +125,28 @@ ul {
   font-size: 32px;
 }
 
+.app-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.settings-button {
+  min-width: 44px;
+  padding: 8px 10px;
+  font-size: 18px;
+}
+
+.theme-option-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.theme-option-button {
+  justify-content: flex-start;
+}
+
 .app-layout {
   display: grid;
   grid-template-columns: 320px minmax(0, 1fr);
@@ -112,9 +158,7 @@ ul {
   padding: 16px;
   border: 1px solid var(--border);
   background: linear-gradient(180deg, var(--panel), var(--panel-2));
-  box-shadow:
-    inset 0 0 0 1px rgba(124, 255, 122, 0.03),
-    0 0 24px rgba(0, 0, 0, 0.18);
+  box-shadow: var(--panel-shadow);
 }
 
 .panel-header {

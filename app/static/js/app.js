@@ -1,5 +1,6 @@
 const STORAGE_KEY = "robco-vault:collapsed-folders";
 const BOOT_KEY = "robco-vault:boot-shown";
+const THEME_KEY = "robco-vault:theme";
 
 function readCollapsedFolders() {
   try {
@@ -121,7 +122,30 @@ document.addEventListener("click", (event) => {
   }
 });
 
+function applyTheme(themeName) {
+  const theme = themeName === "classic" ? "classic" : "modern";
+  document.body.setAttribute("data-theme", theme);
+}
+
+function restoreTheme() {
+  const savedTheme = window.localStorage.getItem(THEME_KEY) || "modern";
+  applyTheme(savedTheme);
+}
+
+document.addEventListener("click", (event) => {
+  const themeButton = event.target.closest("[data-theme-select]");
+
+  if (!themeButton) {
+    return;
+  }
+
+  const themeName = themeButton.getAttribute("data-theme-select");
+  window.localStorage.setItem(THEME_KEY, themeName);
+  applyTheme(themeName);
+});
+
 document.addEventListener("DOMContentLoaded", () => {
+  restoreTheme();
   restoreFolderStates();
   showBootOverlayIfNeeded();
 });
