@@ -15,8 +15,11 @@
   <div class="app-layout">
     <aside class="app-sidebar">
       <div class="panel">
-        <div class="panel-header">
+        <div class="panel-header panel-header-tree">
           <h2>Arborescence</h2>
+          {% if current_folder %}
+          <button class="tree-root-add-button" type="button" data-open-modal="create-folder" aria-label="Ajouter un dossier">+</button>
+          {% endif %}
         </div>
 
         {% include 'partials/folder_tree.html' %}

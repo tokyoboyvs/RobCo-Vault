@@ -274,6 +274,18 @@ ul {
   justify-content: flex-start;
 }
 
+.tree-root-add-button {
+  min-width: 30px;
+  min-height: 30px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
 .app-layout {
   display: grid;
   grid-template-columns: 320px minmax(0, 1fr);
@@ -294,6 +306,12 @@ ul {
   border-bottom: 1px solid var(--border);
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+.panel-header-tree {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .panel-lead {
@@ -363,10 +381,24 @@ ul {
 }
 
 .tree-row-menu {
+  min-width: 28px;
+  border: 1px solid transparent;
+  background: transparent;
   color: var(--text-dim);
+  font: inherit;
   font-size: 18px;
   line-height: 1;
   opacity: 0.8;
+  cursor: pointer;
+}
+
+.tree-row-menu:hover,
+.tree-row-menu:focus,
+.tree-root-add-button:hover,
+.tree-root-add-button:focus {
+  outline: none;
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .tree-toggle {
@@ -567,6 +599,34 @@ body[data-theme="classic"] .tree-note-link:focus {
   background: var(--text);
   color: #000000;
   text-decoration: none;
+}
+
+body[data-theme="classic"] .panel-header-tree {
+  margin-bottom: 8px;
+}
+
+body[data-theme="classic"] .tree-root-add-button {
+  border: 0;
+  padding: 0;
+  min-width: auto;
+  min-height: auto;
+  font-size: 24px;
+}
+
+body[data-theme="classic"] .tree-row-menu {
+  border: 0;
+  padding: 0;
+  min-width: auto;
+  color: var(--text);
+  opacity: 1;
+}
+
+body[data-theme="classic"] .tree-row-menu:hover,
+body[data-theme="classic"] .tree-row-menu:focus,
+body[data-theme="classic"] .tree-root-add-button:hover,
+body[data-theme="classic"] .tree-root-add-button:focus {
+  background: none;
+  color: var(--accent);
 }
 
 @media (max-width: 900px) {

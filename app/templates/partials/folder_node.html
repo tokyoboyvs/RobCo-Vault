@@ -3,7 +3,7 @@
     <button class="tree-toggle" type="button" data-folder-toggle data-folder-id="{{ tree.id }}" aria-expanded="true">[-]</button>
     <span class="tree-folder-glyph"><i class="fas fa-folder"></i></span>
     <a class="tree-folder-link" href="{{ url_for('pages.index', folder_id=tree.id) }}">{{ tree.name }}</a>
-    <span class="tree-row-menu">⋮</span>
+    <button class="tree-row-menu" type="button" aria-label="Options">⋮</button>
   </div>
 
   {% if tree.folders %}
@@ -16,7 +16,7 @@
     <li class="tree-note-row">
       <span class="tree-note-glyph"><i class="fas fa-file"></i></span>
       <a class="tree-note-link" href="{{ url_for('pages.index', note_id=note.id) }}">{{ note.name }}</a>
-      <span class="tree-row-menu">⋮</span>
+      <button class="tree-row-menu" type="button" aria-label="Options">⋮</button>
     </li>
 
     {% endfor %}
