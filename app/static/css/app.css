@@ -128,13 +128,14 @@ body[data-theme="classic"] .app-sidebar {
 }
 
 body[data-theme="classic"] .panel {
-  padding: 10px;
+  padding: 8px 10px;
   border: 0;
   background: #000000;
 }
 
 body[data-theme="classic"] .app-sidebar .panel {
   height: 100%;
+  padding-top: 6px;
   overflow-y: auto;
 }
 
@@ -784,7 +785,27 @@ body[data-theme="classic"] .tree-note-link:focus {
 }
 
 body[data-theme="classic"] .panel-header-tree {
+  margin-bottom: 4px;
+  padding-bottom: 0;
+}
+
+body[data-theme="classic"] .app-sidebar .panel-header h2 {
+  font-size: 18px;
+  color: var(--text);
+}
+
+body[data-theme="classic"] .app-sidebar .tree-list {
+  margin-top: 0;
+}
+
+body[data-theme="classic"] .tree-node {
   margin-bottom: 8px;
+}
+
+body[data-theme="classic"] .tree-list-nested,
+body[data-theme="classic"] .tree-notes {
+  padding-left: 16px;
+  margin-top: 4px;
 }
 
 body[data-theme="classic"] .tree-root-add-button {
@@ -813,7 +834,7 @@ body[data-theme="classic"] .tree-root-add-button:focus {
 
 body[data-theme="classic"] .dropdown-menu {
   border-color: var(--border);
-  background: #222222;
+  background: #111111;
 }
 
 body[data-theme="classic"] .dropdown-menu-button,
