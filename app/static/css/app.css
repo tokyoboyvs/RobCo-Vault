@@ -13,14 +13,138 @@
 
 body[data-theme="classic"] {
   --bg: #000000;
-  --panel: #050505;
-  --panel-2: #090909;
+  --panel: #000000;
+  --panel-2: #000000;
   --text: #33ff33;
   --text-dim: #24b324;
   --border: #33ff33;
   --accent: #7dff7d;
   --header-bg: #000000;
   --panel-shadow: none;
+}
+
+body[data-theme="classic"] {
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
+}
+
+body[data-theme="classic"]::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(rgba(0, 0, 0, 0.1) 0px, rgba(0, 0, 0, 0.1) 2px, rgba(0, 255, 0, 0.05) 4px);
+  z-index: 0;
+}
+
+body[data-theme="classic"] .app-shell {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body[data-theme="classic"] .app-header {
+  padding: 10px;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+  justify-content: center;
+  position: relative;
+}
+
+body[data-theme="classic"] .app-header > div:first-child {
+  text-align: center;
+}
+
+body[data-theme="classic"] .app-kicker {
+  display: none;
+}
+
+body[data-theme="classic"] .app-title {
+  font-size: 24px;
+  color: var(--text);
+}
+
+body[data-theme="classic"] .app-header-actions {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+}
+
+body[data-theme="classic"] .app-status {
+  display: none;
+}
+
+body[data-theme="classic"] .settings-button {
+  min-width: 36px;
+  padding: 4px 8px;
+}
+
+body[data-theme="classic"] .app-layout {
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 0;
+  min-height: calc(100vh - 54px);
+}
+
+body[data-theme="classic"] .app-sidebar {
+  border-right: 1px solid var(--border);
+}
+
+body[data-theme="classic"] .panel {
+  padding: 10px;
+  border: 0;
+  background: #000000;
+}
+
+body[data-theme="classic"] .app-sidebar .panel {
+  height: 100%;
+}
+
+body[data-theme="classic"] .app-main .panel {
+  height: 100%;
+}
+
+body[data-theme="classic"] .panel-header {
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  text-transform: none;
+  letter-spacing: 0;
+  border-bottom: 0;
+}
+
+body[data-theme="classic"] .panel-header h2 {
+  font-size: 20px;
+  font-weight: normal;
+}
+
+body[data-theme="classic"] .action-button,
+body[data-theme="classic"] .text-input,
+body[data-theme="classic"] .tree-toggle,
+body[data-theme="classic"] .note-textarea {
+  border-color: var(--border);
+  background: #111111;
+  color: var(--text);
+  box-shadow: none;
+}
+
+body[data-theme="classic"] .action-button:hover,
+body[data-theme="classic"] .action-button:focus,
+body[data-theme="classic"] .text-input:focus,
+body[data-theme="classic"] .tree-toggle:hover,
+body[data-theme="classic"] .tree-toggle:focus {
+  background: var(--text);
+  color: #000000;
+  box-shadow: none;
+}
+
+body[data-theme="classic"] .action-button-danger {
+  color: var(--text);
+  border-color: var(--border);
+}
+
+body[data-theme="classic"] .action-button-danger:hover,
+body[data-theme="classic"] .action-button-danger:focus {
+  color: #000000;
+  border-color: var(--border);
 }
 
 body[data-theme="modern"] {
@@ -53,6 +177,7 @@ body::before {
   inset: 0;
   pointer-events: none;
   background: radial-gradient(circle at top, rgba(124, 255, 122, 0.08), transparent 55%);
+  z-index: 0;
 }
 
 .boot-overlay[hidden] {
@@ -96,6 +221,8 @@ ul {
 }
 
 .app-shell {
+  position: relative;
+  z-index: 1;
   width: min(1400px, calc(100% - 32px));
   margin: 0 auto;
   padding: 24px 0 32px;
