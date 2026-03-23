@@ -58,11 +58,13 @@ body[data-theme="classic"] .app-shell {
 }
 
 body[data-theme="classic"] .app-header {
-  padding: 10px;
+  min-height: 54px;
+  padding: 8px 10px;
   border: 0;
   border-bottom: 1px solid var(--border);
   margin-bottom: 0;
   justify-content: center;
+  align-items: center;
   position: relative;
 }
 
@@ -75,14 +77,17 @@ body[data-theme="classic"] .app-kicker {
 }
 
 body[data-theme="classic"] .app-title {
+  margin: 0;
   font-size: 24px;
+  line-height: 1;
   color: var(--text);
 }
 
 body[data-theme="classic"] .app-header-actions {
   position: absolute;
   right: 10px;
-  top: 8px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 body[data-theme="classic"] .app-status {
@@ -90,8 +95,19 @@ body[data-theme="classic"] .app-status {
 }
 
 body[data-theme="classic"] .settings-button {
-  min-width: 36px;
-  padding: 4px 8px;
+  min-width: 28px;
+  min-height: 28px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font-size: 20px;
+}
+
+body[data-theme="classic"] .settings-button:hover,
+body[data-theme="classic"] .settings-button:focus {
+  color: var(--accent);
+  box-shadow: none;
 }
 
 body[data-theme="classic"] .app-layout {
