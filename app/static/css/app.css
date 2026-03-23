@@ -392,6 +392,11 @@ ul {
   cursor: pointer;
 }
 
+.tree-root-add-wrap,
+.tree-row-menu-wrap {
+  position: relative;
+}
+
 .tree-row-menu:hover,
 .tree-row-menu:focus,
 .tree-root-add-button:hover,
@@ -506,6 +511,44 @@ ul {
 
 .tree-empty {
   color: var(--text-dim);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 20;
+  min-width: 180px;
+  padding: 6px;
+  border: 1px solid var(--border);
+  background: #111111;
+}
+
+.dropdown-menu.hidden {
+  display: none !important;
+}
+
+.dropdown-menu-button,
+.dropdown-menu-link {
+  display: block;
+  width: 100%;
+  padding: 6px 8px;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dropdown-menu-button:hover,
+.dropdown-menu-button:focus,
+.dropdown-menu-link:hover,
+.dropdown-menu-link:focus {
+  outline: none;
+  background: var(--text);
+  color: #000000;
 }
 
 .modal[hidden] {
@@ -627,6 +670,16 @@ body[data-theme="classic"] .tree-root-add-button:hover,
 body[data-theme="classic"] .tree-root-add-button:focus {
   background: none;
   color: var(--accent);
+}
+
+body[data-theme="classic"] .dropdown-menu {
+  border-color: var(--border);
+  background: #222222;
+}
+
+body[data-theme="classic"] .dropdown-menu-button,
+body[data-theme="classic"] .dropdown-menu-link {
+  padding: 4px 6px;
 }
 
 @media (max-width: 900px) {

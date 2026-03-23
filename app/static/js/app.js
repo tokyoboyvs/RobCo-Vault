@@ -74,10 +74,38 @@ function setModalOpen(modalName, isOpen) {
   }
 }
 
+function closeTreeMenus() {
+  document.querySelectorAll("[data-tree-menu]").forEach((menu) => {
+    menu.classList.add("hidden");
+  });
+
+  document.querySelectorAll("[data-tree-menu-toggle]").forEach((button) => {
+    button.setAttribute("aria-expanded", "false");
+  });
+}
+
 document.addEventListener("click", (event) => {
+  const menuToggle = event.target.closest("[data-tree-menu-toggle]");
+
+  if (menuToggle) {
+    const menuName = menuToggle.getAttribute("data-tree-menu-toggle");
+    const menu = document.querySelector(`[data-tree-menu="${menuName}"]`);
+    const isHidden = menu ? menu.classList.contains("hidden") : true;
+
+    closeTreeMenus();
+
+    if (menu && isHidden) {
+      menu.classList.remove("hidden");
+      menuToggle.setAttribute("aria-expanded", "true");
+    }
+
+    return;
+  }
+
   const openTrigger = event.target.closest("[data-open-modal]");
 
   if (openTrigger) {
+    closeTreeMenus();
     setModalOpen(openTrigger.getAttribute("data-open-modal"), true);
     return;
   }
@@ -88,6 +116,12 @@ document.addEventListener("click", (event) => {
     if (modal) {
       modal.setAttribute("hidden", "");
     }
+
+    return;
+  }
+
+  if (!event.target.closest("[data-tree-menu]")) {
+    closeTreeMenus();
   }
 });
 

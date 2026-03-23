@@ -18,7 +18,16 @@
         <div class="panel-header panel-header-tree">
           <h2>Arborescence</h2>
           {% if current_folder %}
-          <button class="tree-root-add-button" type="button" data-open-modal="create-folder" aria-label="Ajouter un dossier">+</button>
+          <div class="tree-root-add-wrap">
+            <button class="tree-root-add-button" type="button" data-tree-menu-toggle="root-add-menu" aria-label="Ajouter un element" aria-expanded="false">+</button>
+
+            <div class="dropdown-menu hidden" data-tree-menu="root-add-menu">
+              <button class="dropdown-menu-button" type="button" data-open-modal="create-folder">Ajouter dossier</button>
+              <button class="dropdown-menu-button" type="button" data-open-modal="create-note">Ajouter note</button>
+              <button class="dropdown-menu-button" type="button" data-open-modal="create-note-password">Ajouter note protegee</button>
+            </div>
+          </div>
+
           {% endif %}
         </div>
 

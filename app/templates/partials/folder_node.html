@@ -3,7 +3,13 @@
     <button class="tree-toggle" type="button" data-folder-toggle data-folder-id="{{ tree.id }}" aria-expanded="true">[-]</button>
     <span class="tree-folder-glyph"><i class="fas fa-folder"></i></span>
     <a class="tree-folder-link" href="{{ url_for('pages.index', folder_id=tree.id) }}">{{ tree.name }}</a>
-    <button class="tree-row-menu" type="button" aria-label="Options">⋮</button>
+    <div class="tree-row-menu-wrap">
+      <button class="tree-row-menu" type="button" data-tree-menu-toggle="folder-menu-{{ tree.id }}" aria-label="Options" aria-expanded="false">⋮</button>
+
+      <div class="dropdown-menu hidden" data-tree-menu="folder-menu-{{ tree.id }}">
+        <a class="dropdown-menu-link" href="{{ url_for('pages.index', folder_id=tree.id) }}">Ouvrir</a>
+      </div>
+    </div>
   </div>
 
   {% if tree.folders %}
@@ -16,7 +22,13 @@
     <li class="tree-note-row">
       <span class="tree-note-glyph"><i class="fas fa-file"></i></span>
       <a class="tree-note-link" href="{{ url_for('pages.index', note_id=note.id) }}">{{ note.name }}</a>
-      <button class="tree-row-menu" type="button" aria-label="Options">⋮</button>
+      <div class="tree-row-menu-wrap">
+        <button class="tree-row-menu" type="button" data-tree-menu-toggle="note-menu-{{ note.id }}" aria-label="Options" aria-expanded="false">⋮</button>
+
+        <div class="dropdown-menu hidden" data-tree-menu="note-menu-{{ note.id }}">
+          <a class="dropdown-menu-link" href="{{ url_for('pages.index', note_id=note.id) }}">Ouvrir</a>
+        </div>
+      </div>
     </li>
 
     {% endfor %}
