@@ -15,15 +15,21 @@ Parite deja reconstruite:
 - ecran de bienvenue par session
 - base visuelle RobCo
 
-Reste a finaliser:
+Phase actuelle terminee:
 
-- ajustements visuels fins pour coller encore davantage a la V1
-- revue manuelle de parite comportementale
-- nettoyage des donnees de test locales si necessaire
+- reconstruction fonctionnelle V2 terminee
+- rapprochement visuel majeur avec la V1 termine
+- RobCo Classic et RobCo Modern disponibles
 
-## Revue finale conseillee
+Suite optionnelle:
 
-Checklist de verification manuelle:
+- revue visuelle fine ecran par ecran
+- nettoyage des donnees locales de test si necessaire
+- nouveaux chantiers fonctionnels
+
+## Revue finale optionnelle
+
+Checklist de verification manuelle si tu veux pousser la finition:
 
 - creer, renommer et supprimer un dossier
 - creer, lire, editer, renommer et supprimer une note
