@@ -664,11 +664,20 @@ ul {
   background: rgba(0, 0, 0, 0.72);
 }
 
+body[data-theme="classic"] .modal-backdrop {
+  background: rgba(0, 0, 0, 0.82);
+}
+
 .modal-dialog {
   position: relative;
   z-index: 1;
   width: min(560px, calc(100% - 32px));
   margin: 10vh auto 0;
+}
+
+body[data-theme="classic"] .modal-dialog {
+  width: min(420px, calc(100% - 32px));
+  margin: 18vh auto 0;
 }
 
 .modal-label {
@@ -681,6 +690,35 @@ ul {
   display: flex;
   gap: 10px;
   margin-top: 16px;
+}
+
+body[data-theme="classic"] .modal-dialog .panel {
+  padding: 20px;
+  border: 1px solid var(--border);
+  background: #111111;
+}
+
+body[data-theme="classic"] .modal-dialog .panel-header {
+  margin-bottom: 12px;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+body[data-theme="classic"] .modal-dialog .panel-header h2 {
+  font-size: 18px;
+  font-weight: normal;
+  color: var(--text);
+}
+
+body[data-theme="classic"] .modal-label {
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+body[data-theme="classic"] .modal-actions {
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
 }
 
 ul {
@@ -777,6 +815,16 @@ body[data-theme="classic"] .dropdown-menu {
 body[data-theme="classic"] .dropdown-menu-button,
 body[data-theme="classic"] .dropdown-menu-link {
   padding: 4px 6px;
+}
+
+body[data-theme="classic"] .modal-dialog .action-button {
+  min-width: 0;
+  padding: 5px 10px;
+}
+
+body[data-theme="classic"] .modal-dialog .text-input {
+  width: 100%;
+  min-width: 0;
 }
 
 body[data-theme="classic"] * {
