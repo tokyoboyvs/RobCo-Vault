@@ -2,6 +2,7 @@
 __pycache__/
 .venv/
 venv/
+.v1/
 .env
 instance/*.db
 Thumbs.db
