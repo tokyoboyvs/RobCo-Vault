@@ -97,11 +97,14 @@ body[data-theme="classic"] .settings-button {
 body[data-theme="classic"] .app-layout {
   grid-template-columns: 240px minmax(0, 1fr);
   gap: 0;
+  height: calc(100vh - 54px);
   min-height: calc(100vh - 54px);
+  overflow: hidden;
 }
 
 body[data-theme="classic"] .app-sidebar {
   border-right: 1px solid var(--border);
+  overflow-y: auto;
 }
 
 body[data-theme="classic"] .panel {
@@ -112,10 +115,23 @@ body[data-theme="classic"] .panel {
 
 body[data-theme="classic"] .app-sidebar .panel {
   height: 100%;
+  overflow-y: auto;
 }
 
 body[data-theme="classic"] .app-main .panel {
   height: 100%;
+  overflow-y: auto;
+}
+
+body[data-theme="classic"] .app-main {
+  overflow: hidden;
+}
+
+body[data-theme="classic"] .app-main .panel-header {
+  position: sticky;
+  top: 0;
+  background: #000000;
+  z-index: 2;
 }
 
 body[data-theme="classic"] .panel-header {
